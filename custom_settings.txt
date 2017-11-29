@@ -53,7 +53,7 @@ Scenario.nrofHostGroups = 6
 # Common settings for all groups
 Group.movementModel = ShortestPathMapBasedMovement
 Group.router = EpidemicRouter
-Group.bufferSize = 5M
+Group.bufferSize = 300M
 Group.waitTime = 0, 120
 # All nodes have the bluetooth interface
 Group.nrofInterfaces = 1
@@ -61,7 +61,7 @@ Group.interface1 = fogInterface
 # Walking speeds
 Group.speed = 0.0, 0.0
 # Message TTL of 300 minutes (5 hours)
-Group.msgTtl = 300
+Group.msgTtl = 1000000
 
 
 # group2 (fog devices) specific settings
@@ -101,7 +101,7 @@ Group1.groupID = drone
 # 10-50 km/h
 Group1.speed = 0.5, 0.5
 Group1.nrofHosts = 20
-Group1.bufferSize = 1M
+Group1.bufferSize = 40M
 
 # group3 (clients) specific settings
 #Group3.groupID = client
@@ -130,7 +130,7 @@ MovementModel.rngSeed = 1
 # World's size for Movement Models without implicit size (width, height; meters)
 MovementModel.worldSize = 4500, 3400
 # How long time to move hosts in the world before real simulation
-MovementModel.warmup = 1000
+MovementModel.warmup = 0
 
 ## Map based movement -movement model specific settings
 MapBasedMovement.nrofMapFiles = 4

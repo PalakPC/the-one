@@ -480,6 +480,7 @@ public abstract class ActiveRouter extends MessageRouter {
 			tryMessagesForConnected(sortByQueueMode(getMessagesForConnected()));
 
 		if (t != null) {
+			System.out.println("delivered message: " + t.getKey().getId());
 			return t.getValue(); // started transfer
 		}
 
