@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+
 /**
  * A message that is created at a node or passed between nodes.
  */
@@ -48,6 +49,8 @@ public class Message implements Comparable<Message> {
 
 	/** Application ID of the application that created the message */
 	private String	appID;
+	
+	private Priority priority;
 
 	static {
 		reset();
@@ -60,6 +63,7 @@ public class Message implements Comparable<Message> {
 	 * @param to Who the message is (originally) to
 	 * @param id Message identifier (must be unique for message but
 	 * 	will be the same for all replicates of the message)
+	 * @param size 
 	 * @param size Size of the message (in bytes)
 	 */
 	public Message(DTNHost from, DTNHost to, String id, int size) {
@@ -77,6 +81,8 @@ public class Message implements Comparable<Message> {
 		this.requestMsg = null;
 		this.properties = null;
 		this.appID = null;
+		
+		this.priority = priorCalculate();
 
 		Message.nextUniqueId++;
 		addNodeOnPath(from);
@@ -86,6 +92,35 @@ public class Message implements Comparable<Message> {
 	 * Returns the node this message is originally from
 	 * @return the node this message is originally from
 	 */
+	
+	private Priority priorCalculate()
+	{
+		Priority p;
+		int prior = 0 + (int)(Math.random() * ((2 - 0) + 1));
+		switch (prior)
+		{
+			case 0:
+				p = Priority.LOW;
+				break;
+			case 1:
+				p = Priority.NORMAL;
+				break;
+			case 2:
+				p = Priority.HIGH;
+				break;
+			default:
+				System.out.println("Invalid random");
+				p = Priority.LOW;
+				break;
+		}
+		return p;
+	}
+	
+	public void setPriority(Priority p)
+	{
+		this.priority = p;
+	}
+	
 	public DTNHost getFrom() {
 		return this.from;
 	}
@@ -262,6 +297,7 @@ public class Message implements Comparable<Message> {
 		this.requestMsg  = m.requestMsg;
 		this.initTtl = m.initTtl;
 		this.appID = m.appID;
+		this.priority = m.priority;
 
 		if (m.properties != null) {
 			Set<String> keys = m.properties.keySet();
