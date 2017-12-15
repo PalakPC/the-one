@@ -52,7 +52,7 @@ Scenario.nrofHostGroups = 6
 
 # Common settings for all groups
 Group.movementModel = RandomWaypoint
-Group.router = DirectDeliveryRouter
+Group.router = MaxPropRouter
 Group.bufferSize = 300M
 Group.waitTime = 0, 120
 # All nodes have the bluetooth interface
